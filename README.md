@@ -2,7 +2,7 @@
 
 A command-line http server for loading static content. It can be used for local development, testing, and production purposes.
 
-## Install
+## Installation
 
 ```sh
 dotnet tool install -g FileServer
@@ -16,14 +16,15 @@ To run file-server on a custom port, provide `--port` or `-p` as an argument. Fo
 
 ```file-server --port <PORT>```
 
-You can also run multiple insances on file-server where each listens on a subsequent port unless a custom one is provided.
+It is possible to run multiple insances of file-server where each listens on a subsequent port unless a custom one is provided.
 
 ## Development
 
 FileServer runs on [.NET 5](https://dotnet.microsoft.com/download/dotnet/5.0)
 
-### Install the Tool from Source
+### Installation from Source
 
-1. `cd path\to\file-server`
+0. `git clone https://github.com/deniskyashif/file-server.git`
+1. `cd file-server`
 2. Run `dotnet pack`
 3. Run `dotnet tool install --global --add-source .\nupkg\ FileServer`

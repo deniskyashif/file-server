@@ -351,3 +351,5 @@ MigrationBackup/
 .idea
 .DS_STORE
 .vscode/
+
+src/publish.sh
