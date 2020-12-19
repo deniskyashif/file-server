@@ -5,8 +5,14 @@
 		<IsPackable>true</IsPackable>
 		<PackAsTool>true</PackAsTool>
 		<ToolCommandName>file-server</ToolCommandName>
-		<Version>1.0.0</Version>
+		<Version>1.0.1</Version>
 		<PackageOutputPath>./nupkg</PackageOutputPath>
+		<Authors>Denis Kyashif</Authors>
+		<Product>FileServer</Product>
+		<Description>A simple, command-line http server for loading static content.</Description>
+		<Copyright>Copyright © Denis Kyashif 2020</Copyright>
+		<PackageTags>http-server</PackageTags>
+		<RepositoryUrl>https://github.com/deniskyashif/file-server</RepositoryUrl>
 	</PropertyGroup>
 
 </Project>
