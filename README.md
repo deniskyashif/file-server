@@ -23,6 +23,6 @@ It is possible to run multiple insances of file-server where each listens on a s
 ### Installation from Source
 
 0. `git clone https://github.com/deniskyashif/file-server.git`
-1. `cd file-server`
+1. `cd file-server/src`
 2. Run `dotnet pack`
-3. Run `dotnet tool install --global --add-source .\nupkg\ FileServer`
+3. Run `dotnet tool install --global --add-source ./nupkg/ FileServer`
