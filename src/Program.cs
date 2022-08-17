@@ -5,60 +5,55 @@ using System.Net.Sockets;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-public class Program
+const int DefaultPort = 8080;
+
+var useCustomPort = args.Length == 2 && (args[0].Equals("-p") || args[0].Equals("--port"));
+var port = useCustomPort ? int.Parse(args[1]) : GetAvailablePort(DefaultPort);
+
+var hostBuilder = CreateHostBuilder(args, port);
+
+var ps = new ProcessStartInfo($"http://localhost:{port}")
 {
-	const int DefaultPort = 8080;
+	UseShellExecute = true,
+	Verb = "open"
+};
+Process.Start(ps);
 
-	public static void Main(string[] args)
-	{
-		var useCustomPort = args.Length == 2 && (args[0].Equals("-p") || args[0].Equals("--port"));
-		var port = useCustomPort ? int.Parse(args[1]) : GetAvailablePort(DefaultPort);
+hostBuilder.Build().Run();
 
-		var hostBuilder = CreateHostBuilder(args, port);
 
-		var ps = new ProcessStartInfo($"http://localhost:{port}")
+static IHostBuilder CreateHostBuilder(string[] args, int port)
+{
+	var rootDir = Directory.GetCurrentDirectory();
+
+	return Host.CreateDefaultBuilder(args)
+		.ConfigureWebHostDefaults(webBuilder =>
 		{
-			UseShellExecute = true,
-			Verb = "open"
-		};
-		Process.Start(ps);
+			webBuilder.UseUrls($"http://*:{port}");
+			webBuilder.UseContentRoot(rootDir);
+			webBuilder.UseStartup<Startup>();
+		});
+}
 
-		hostBuilder.Build().Run();
-	}
+static int GetAvailablePort(int initialPort)
+{
+	while (IsPortInUse(initialPort))
+		initialPort++;
 
-	static IHostBuilder CreateHostBuilder(string[] args, int port)
+	return initialPort;
+}
+
+static bool IsPortInUse(int port)
+{
+	try
 	{
-		var rootDir = Directory.GetCurrentDirectory();
+		using var tcpClient = new TcpClient();
+		tcpClient.Connect("127.0.0.1", port);
 
-		return Host.CreateDefaultBuilder(args)
-			.ConfigureWebHostDefaults(webBuilder =>
-			{
-				webBuilder.UseUrls($"http://*:{port}");
-				webBuilder.UseContentRoot(rootDir);
-				webBuilder.UseStartup<Startup>();
-			});
+		return true;
 	}
-
-	static int GetAvailablePort(int initialPort)
+	catch (Exception)
 	{
-		while (IsPortInUse(initialPort))
-			initialPort++;
-
-		return initialPort;
-	}
-
-	static bool IsPortInUse(int port)
-	{
-		try
-		{
-			using var tcpClient = new TcpClient();
-			tcpClient.Connect("127.0.0.1", port);
-
-			return true;
-		}
-		catch (Exception)
-		{
-			return false;
-		}
+		return false;
 	}
 }
