@@ -4,7 +4,7 @@ A simple, command-line http server for loading static content. It can be used fo
 
 ## Installation
 
-FileServer is cross-platform and runs on [.NET 5](https://dotnet.microsoft.com/download/dotnet/5.0).
+FileServer is cross-platform and runs on [.NET 6](https://dotnet.microsoft.com/download/dotnet/6.0).
 
 ```sh
 dotnet tool install -g FileServer
