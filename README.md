@@ -2,7 +2,7 @@
 
 A simple, command-line http server for loading static content. It can be used for local development and testing purposes.
 
-## Installation
+## Install
 
 FileServer is cross-platform and runs on [.NET 6](https://dotnet.microsoft.com/download/dotnet/6.0).
 
@@ -20,7 +20,7 @@ To run file-server on a custom port, provide `--port` or `-p` as an argument. Fo
 
 It is possible to run multiple insances of file-server where each listens on a subsequent port unless a custom one is provided.
 
-### Installation from Source
+### Install from Source
 
 0. `git clone https://github.com/deniskyashif/file-server.git`
 1. `cd file-server/src`
